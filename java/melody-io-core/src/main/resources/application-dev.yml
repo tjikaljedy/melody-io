@@ -1,0 +1,5 @@
+server:
+  port: 8443
+  ssl:
+    key-store: file:/Users/tjikaljedy/Workspace/SSL/dev/melody-io.p12
+    key-store-password: changeit

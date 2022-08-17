@@ -1,0 +1,63 @@
+buildscript {
+	ext {
+		springBootVer = '2.7.2'
+		
+		//Reactive
+		reactorVer = '3.4.22'
+		rsocketVer = '1.1.2'
+		
+		//Apache
+		cborVer = '2.13.3'
+	}
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		
+	}
+	
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'io.melody'
+version = '10.0.0'
+sourceCompatibility = '13'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	implementation ('org.springframework.boot:spring-boot-starter-websocket:'+springBootVer) {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	
+	}
+	providedRuntime 'org.springframework.boot:spring-boot-starter-jetty:'+springBootVer
+	
+	//Reactive
+	implementation 'io.projectreactor:reactor-core:'+reactorVer
+	implementation 'io.rsocket:rsocket-core:'+rsocketVer
+	implementation 'io.rsocket:rsocket-transport-netty:'+rsocketVer
+	
+	//Apache Common
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:'+cborVer
+	
+	//Others
+	providedCompile 'org.projectlombok:lombok'
+  	annotationProcessor 'org.projectlombok:lombok'
+	
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'com.vaadin.external.google', module: 'android-json'
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
