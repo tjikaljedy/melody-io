@@ -3,7 +3,7 @@ package handle
 import (
 	"errors"
 	"fmt"
-	"melody-io/midware/pkg/rsocket-route/decode"
+	"melody-io/proto/midware/pkg/rsocket-route/decode"
 
 	"github.com/rsocket/rsocket-go"
 
