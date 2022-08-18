@@ -20,26 +20,26 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootApplication
-@ComponentScan({ "io.melody.gateway" })
+@ComponentScan({ "io.melody.core" })
 @EnableAutoConfiguration(exclude = { WebSocketServletAutoConfiguration.class,
 		ReactiveUserDetailsServiceAutoConfiguration.class, DataSourceAutoConfiguration.class})
-public class MelodyGateway extends SpringBootServletInitializer {
+public class Midware extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MelodyGateway.class, args);
+		SpringApplication.run(Midware.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		setRegisterErrorPageFilter(false);
-		builder.sources(MelodyGateway.class);
+		builder.sources(Midware.class);
 		return builder;
 	}
 	
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void readyToUse(ApplicationReadyEvent event) {
-		log.info(">>> SERVER STARTUP <<<");
+		log.info(">>> MIDWARE STARTUP <<<");
 		try {
 			TimeUnit.SECONDS.sleep(1);
 			
@@ -50,8 +50,8 @@ public class MelodyGateway extends SpringBootServletInitializer {
 	
 	@PreDestroy
 	public void onDestroy() throws Exception {
-		log.info(">>> SERVER SHUTDOWN <<<");
-		
+		log.info(">>> MIDWARE SHUTDOWN <<<");
+
 	}
 
 }

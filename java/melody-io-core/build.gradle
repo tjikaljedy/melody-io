@@ -8,6 +8,9 @@ buildscript {
 		
 		//Apache
 		cborVer = '2.13.3'
+		
+		//In memoryDB
+		sawvyDbVer = '0.16.2'
 	}
 	repositories {
 		mavenLocal()
@@ -47,6 +50,9 @@ dependencies {
 	
 	//Apache Common
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:'+cborVer
+	
+	//In memoryDB
+	implementation 'io.swaydb:java_2.13:'+sawvyDbVer
 	
 	//Others
 	providedCompile 'org.projectlombok:lombok'

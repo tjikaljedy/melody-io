@@ -1,4 +1,4 @@
-package io.melody.gateway.config;
+package io.melody.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
