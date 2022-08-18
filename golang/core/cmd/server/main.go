@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	midware "melody-io/core/internal"
+	"melody-io/core/cmd"
 	"melody-io/core/internal/auth"
-	"melody-io/core/pkg/log"
 	"os"
 	"time"
 )
@@ -12,14 +11,13 @@ import (
 var intro = `Running "todo" server with the following options:
 	TODO_DEBOUNCE: %s
 `
-var logger = log.New()
 
 func main() {
 	debounce := parseDebounce()
 
 	fmt.Printf(intro, debounceText(debounce))
 
-	var setup midware.Setup
+	var setup cmd.Setup
 
 	ctx, cancel := setup.Context()
 	defer cancel()
@@ -32,7 +30,7 @@ func main() {
 	repo := setup.Aggregates(estore)
 
 	commandErrors := auth.HandleCommands(ctx, cbus, repo)
-	logger.Error(ctx, commandErrors)
+	cmd.LogErrors(ctx, commandErrors)
 }
 
 func parseDebounce() time.Duration {

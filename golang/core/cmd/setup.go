@@ -1,4 +1,4 @@
-package midware
+package cmd
 
 import (
 	"context"

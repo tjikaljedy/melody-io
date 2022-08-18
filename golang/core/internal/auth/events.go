@@ -4,7 +4,7 @@ import "github.com/modernice/goes/codec"
 
 // Events
 const (
-	TaskUserSigin = "todo.auth.task_usersignin"
+	TaskUserSigin = "auth.task_usersignin"
 )
 
 // ListEvents are all events of a todo list.

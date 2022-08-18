@@ -11,7 +11,7 @@ import (
 	"github.com/modernice/goes/event"
 )
 
-const LoginAggregate = "todo.login"
+const LoginAggregate = "auth.login"
 
 type Login struct {
 	*aggregate.Base

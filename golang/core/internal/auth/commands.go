@@ -12,7 +12,7 @@ import (
 
 // Commands
 const (
-	UserSigninCmd = "todo.auth.usersignin_task"
+	UserSigninCmd = "auth.usersignin_task"
 )
 
 func UserSigninTask(userID uuid.UUID, task string) command.Cmd[string] {
