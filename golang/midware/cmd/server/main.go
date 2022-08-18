@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"flag"
-	"melody-io/core/pkg/config"
-	"melody-io/core/pkg/log"
+	"melody-io/midware/pkg/config"
+	"melody-io/midware/pkg/log"
 	route "melody-io/midware/pkg/rsocket-route"
 	"net/http"
 	"os"
