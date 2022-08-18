@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"melody-io/core/cmd"
 	"melody-io/core/internal/auth"
+	"melody-io/core/pkg"
 	"os"
 	"time"
 )
@@ -30,7 +31,7 @@ func main() {
 	repo := setup.Aggregates(estore)
 
 	commandErrors := auth.HandleCommands(ctx, cbus, repo)
-	cmd.LogErrors(ctx, commandErrors)
+	pkg.LogErrors(ctx, commandErrors)
 }
 
 func parseDebounce() time.Duration {
