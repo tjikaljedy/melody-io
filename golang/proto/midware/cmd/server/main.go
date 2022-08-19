@@ -2,20 +2,20 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"flag"
 	"melody-io/proto/midware/pkg/config"
 	"melody-io/proto/midware/pkg/log"
 	route "melody-io/proto/midware/pkg/rsocket-route"
+	"melody-io/proto/midware/pkg/rsocket-route/decode"
 	"net/http"
 	"os"
 
 	"github.com/rsocket/rsocket-go"
 	"github.com/rsocket/rsocket-go/core/transport"
 	"github.com/rsocket/rsocket-go/payload"
-	"github.com/rsocket/rsocket-go/rx"
 	"github.com/rsocket/rsocket-go/rx/flux"
-	"github.com/rsocket/rsocket-go/rx/mono"
 )
 
 var tp transport.ServerTransporter
@@ -31,9 +31,10 @@ func init() {
 		os.Exit(-1)
 	}
 
-	Routings["/request-response"] = echoRR
-	Routings["/request-stream"] = echoRS
-	Routings["/request-channel"] = echoRC
+	Routings["initial"] = initialRS
+	Routings["initial2"] = initialRS2
+	//Routings["/request-stream"] = echoRS
+	//Routings["/request-channel"] = echoRC
 
 	err = route.Add(Routings)
 	if err != nil {
@@ -64,9 +65,35 @@ func main() {
 		panic(err)
 	}
 }
+
+func initialRS(msg payload.Payload) flux.Flux {
+	//metadata, ok := msg.Metadata()
+	//au := extension.MustNewAuthentication("simple", metadata)
+	//logger.Info(au.Payload())
+	//logger.Info(ok)
+	logger.Info(">>>>> 1")
+	return flux.Just(msg)
+}
+
+func initialRS2(msg payload.Payload) flux.Flux {
+	if metadata, exists := msg.Metadata(); exists {
+		auth, err := decode.Authorize(metadata)
+		if err != nil {
+			panic(err)
+		}
+
+		authData := decode.DecodeSimpleAuthPayload(auth.Type(), auth.Payload())
+		fmt.Println(authData)
+	}
+
+	return flux.Just(msg)
+}
+
+/*
 func echoRR(msg payload.Payload) mono.Mono {
 	return mono.Just(msg)
 }
+
 
 func echoRS(msg payload.Payload) flux.Flux {
 	return flux.Just(msg)
@@ -74,7 +101,7 @@ func echoRS(msg payload.Payload) flux.Flux {
 
 func echoRC(msgs rx.Publisher) flux.Flux {
 	return msgs.(flux.Flux)
-}
+}*/
 
 /*
 func responder() rsocket.RSocket {
@@ -129,5 +156,4 @@ func responder() rsocket.RSocket {
 			})
 		}),
 	)
-}
-*/
+}*/

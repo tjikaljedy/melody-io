@@ -2,6 +2,9 @@ buildscript {
 	ext {
 		springBootVer = '2.7.2'
 		
+		//NATS
+		natsVer = '2.15.6'
+		
 		//Reactive
 		reactorVer = '3.4.22'
 		rsocketVer = '1.1.2'
@@ -34,6 +37,7 @@ sourceCompatibility = '13'
 repositories {
 	mavenLocal()
 	mavenCentral()
+	
 }
 
 dependencies {
@@ -42,6 +46,10 @@ dependencies {
 	
 	}
 	providedRuntime 'org.springframework.boot:spring-boot-starter-jetty:'+springBootVer
+	
+	//NATS
+	implementation 'io.nats:jnats:'+natsVer
+	
 	
 	//Reactive
 	implementation 'io.projectreactor:reactor-core:'+reactorVer
