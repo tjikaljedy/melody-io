@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	"flag"
-	"melody-io/proto/midware/pkg/config"
-	"melody-io/proto/midware/pkg/log"
-	route "melody-io/proto/midware/pkg/rsocket-route"
-	"melody-io/proto/midware/pkg/rsocket-route/decode"
+	"melody-io/midware/pkg/config"
+	"melody-io/midware/pkg/log"
+	route "melody-io/midware/pkg/rsocket-route"
+	"melody-io/midware/pkg/rsocket-route/decode"
 	"net/http"
 	"os"
 
