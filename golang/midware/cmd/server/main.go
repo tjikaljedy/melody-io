@@ -77,12 +77,10 @@ func initialRS(msg payload.Payload) flux.Flux {
 
 func initialRS2(msg payload.Payload) flux.Flux {
 	if metadata, exists := msg.Metadata(); exists {
-		auth, err := decode.Authorize(metadata)
+		authData, err := decode.Authorize(metadata)
 		if err != nil {
 			panic(err)
 		}
-
-		authData := decode.DecodeSimpleAuthPayload(auth.Type(), auth.Payload())
 		fmt.Println(authData)
 	}
 

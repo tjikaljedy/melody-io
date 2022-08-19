@@ -40,7 +40,7 @@ func Routes(metadataRaw []byte) ([]string, bool) {
 	return nil, false
 }
 
-func Authorize(metadataRaw []byte) (auth *extension.Authentication, err error) {
+func Authorize(metadataRaw []byte) (authData *AuthorizeData, err error) {
 	headers := MimeType(metadataRaw)
 	if authTags, exists := headers[extension.MessageAuthentication.String()]; exists {
 		auth, err := extension.ParseAuthentication(authTags)
@@ -48,7 +48,7 @@ func Authorize(metadataRaw []byte) (auth *extension.Authentication, err error) {
 			fmt.Printf("%v\n", err)
 		}
 		if err == nil && auth != nil {
-			return auth, err
+			return decodeSimpleAuthPayload(auth.Type(), auth.Payload()), err
 		}
 	}
 	return nil, err
@@ -109,8 +109,11 @@ func Metadata(metadataMimeType string, metadata []byte) (response map[string]str
 	}
 	return
 }
+func BytesToString(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
+}
 
-func DecodeSimpleAuthPayload(authType string, auth []byte) *AuthorizeData {
+func decodeSimpleAuthPayload(authType string, auth []byte) *AuthorizeData {
 	usernameLength := binary.BigEndian.Uint16(auth)
 	if authType == _simpleAuth {
 		return &AuthorizeData{
@@ -123,8 +126,4 @@ func DecodeSimpleAuthPayload(authType string, auth []byte) *AuthorizeData {
 		authType: _bearerAuth,
 		bearer:   string(auth),
 	}
-}
-
-func BytesToString(b []byte) string {
-	return *(*string)(unsafe.Pointer(&b))
 }
