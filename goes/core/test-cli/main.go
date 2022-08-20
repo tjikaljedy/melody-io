@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"melody-io/core/cmd"
-	"melody-io/core/internal/auth"
+	"melody-io-cqrs/core/cmd"
+	"melody-io-cqrs/core/internal/auth"
 	"time"
 
 	"github.com/google/uuid"

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"melody-io/core/cmd"
-	"melody-io/core/internal/auth"
-	"melody-io/core/pkg"
+	"melody-io-cqrs/core/cmd"
+	"melody-io-cqrs/core/internal/auth"
+	"melody-io-cqrs/core/pkg"
 	"os"
 	"time"
 )

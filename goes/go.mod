@@ -1,4 +1,4 @@
-module melody-io
+module melody-io-cqrs
 
 go 1.19
 

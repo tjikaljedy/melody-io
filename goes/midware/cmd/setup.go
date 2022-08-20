@@ -3,7 +3,7 @@ package cmd
 import (
 	"context"
 	"log"
-	"melody-io/midware/internal/auth"
+	"melody-io-cqrs/midware/internal/auth"
 	"os"
 	"os/signal"
 	"syscall"
