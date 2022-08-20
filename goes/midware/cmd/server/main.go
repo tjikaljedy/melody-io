@@ -3,8 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"math/rand"
+	"time"
 
 	"flag"
+
+	"melody-io/midware/cmd"
+	"melody-io/midware/internal/auth"
 	"melody-io/midware/pkg/config"
 	"melody-io/midware/pkg/log"
 	route "melody-io/midware/pkg/rsocket-route"
@@ -12,6 +17,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/google/uuid"
 	"github.com/rsocket/rsocket-go"
 	"github.com/rsocket/rsocket-go/core/transport"
 	"github.com/rsocket/rsocket-go/payload"
@@ -67,10 +73,6 @@ func main() {
 }
 
 func initialRS(msg payload.Payload) flux.Flux {
-	//metadata, ok := msg.Metadata()
-	//au := extension.MustNewAuthentication("simple", metadata)
-	//logger.Info(au.Payload())
-	//logger.Info(ok)
 	logger.Info(">>>>> 1")
 	return flux.Just(msg)
 }
@@ -82,9 +84,42 @@ func initialRS2(msg payload.Payload) flux.Flux {
 			panic(err)
 		}
 		fmt.Println(authData)
+		initialNATs()
 	}
 
 	return flux.Just(msg)
+}
+func initialNATs() {
+	var setup cmd.Setup
+
+	ctx, cancel := setup.Context()
+	defer cancel()
+
+	ebus, _, ereg, disconnect := setup.Events(ctx, "client")
+	defer disconnect()
+
+	cbus, _ := setup.Commands(ereg, ebus)
+
+	// Wait a bit to ensure that the todo server is running before dispatching commands.
+	<-time.After(3 * time.Second)
+
+	// Create a new todo list and add some tasks.
+	userID := uuid.New()
+	for i := 0; i < 10; i++ {
+		sleepRandom()
+
+		cmd := auth.UserSigninTask(userID, fmt.Sprintf("Task %d", i+1))
+		if err := cbus.Dispatch(ctx, cmd.Any()); err != nil {
+			panic(err)
+		}
+	}
+
+}
+
+func sleepRandom() {
+	dur := time.Duration(rand.Intn(1000)) * time.Millisecond
+	//log.Printf("Waiting %s before dispatching next command ...", dur)
+	time.Sleep(dur)
 }
 
 /*

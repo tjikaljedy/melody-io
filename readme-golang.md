@@ -55,6 +55,7 @@ sudo killall -HUP mDNSResponder
 
 brew services stop mongodb-community
 nats-streaming-server
+kill $(lsof -ti:4222)
 
 # Run Todo Examples
 export MONGO_URL="mongodb://localhost:27017/eventstore"
