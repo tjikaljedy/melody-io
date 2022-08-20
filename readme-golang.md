@@ -24,7 +24,7 @@ go mod init melody-io/midware-es
 
 go get github.com/modernice/goes/...@main
 go mod tidy
-go mod edit -replace melody-io-cqrs/core/=core-es
+go mod edit -replace melody-io/core-es/=core-es
 
 # Manual Install Kafka
 1. Install jdk 13
