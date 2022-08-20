@@ -55,7 +55,9 @@ https://github.com/provectus/kafka-ui
 $ sh bin/zookeeper-server-start.sh config/zookeeper.properties
 $ sh bin/kafka-server-start.sh config/server.properties
 
-GO111MODULE=off
+export GO111MODULE=on
+export GOMODCACHE=~/golang/pkg/mod
+
 sudo killall -HUP mDNSResponder
 
 brew services stop mongodb-community
