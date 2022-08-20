@@ -8,12 +8,12 @@ import (
 
 	"flag"
 
-	"melody-io-cqrs/midware/cmd"
-	"melody-io-cqrs/midware/internal/auth"
-	"melody-io-cqrs/midware/pkg/config"
-	"melody-io-cqrs/midware/pkg/log"
-	route "melody-io-cqrs/midware/pkg/rsocket-route"
-	"melody-io-cqrs/midware/pkg/rsocket-route/decode"
+	"melody-io/midware-es/cmd"
+	"melody-io/midware-es/internal/auth"
+	"melody-io/midware-es/pkg/config"
+	"melody-io/midware-es/pkg/log"
+	route "melody-io/midware-es/pkg/rsocket-route"
+	"melody-io/midware-es/pkg/rsocket-route/decode"
 	"net/http"
 	"os"
 
