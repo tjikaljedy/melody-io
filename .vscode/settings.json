@@ -1,4 +1,5 @@
 {
     "editor.fontSize": 14,
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance",
+    "go.toolsEnvVars": {}
 }

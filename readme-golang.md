@@ -19,7 +19,12 @@ https://github.com/shijuvar
 
 ### Golang init project
 go mod init <name>
+go mod init melody-io/core-es  
+go mod init melody-io/midware-es  
+
+go get github.com/modernice/goes/...@main
 go mod tidy
+go mod edit -replace melody-io-cqrs/core/=core-es
 
 # Manual Install Kafka
 1. Install jdk 13
