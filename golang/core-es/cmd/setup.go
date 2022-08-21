@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 	"melody-io/core-es/internal/auth"
-	"melody-io/core-es/pkg/config"
+	"melody-io/global-es/pkg/config"
 	"os"
 	"os/signal"
 	"syscall"

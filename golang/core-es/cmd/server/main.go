@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"melody-io/core-es/cmd"
 	"melody-io/core-es/internal/auth"
-	"melody-io/core-es/pkg/config"
-	"melody-io/core-es/pkg/log"
+	"melody-io/global-es/pkg/config"
+	"melody-io/global-es/pkg/log"
 	"os"
 	"time"
 )

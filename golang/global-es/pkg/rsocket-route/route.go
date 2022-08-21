@@ -1,7 +1,7 @@
 package route
 
 import (
-	"melody-io/midware-es/pkg/rsocket-route/internal/handle"
+	"melody-io/global-es/pkg/rsocket-route/internal/handle"
 
 	"github.com/rsocket/rsocket-go"
 )

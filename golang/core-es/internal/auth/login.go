@@ -13,6 +13,7 @@ import (
 
 const LoginAggregate = "auth.login"
 
+// Aggregate
 type Login struct {
 	*aggregate.Base
 	*handler.BaseHandler
