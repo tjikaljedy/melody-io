@@ -55,6 +55,7 @@ https://github.com/provectus/kafka-ui
 $ sh bin/zookeeper-server-start.sh config/zookeeper.properties
 $ sh bin/kafka-server-start.sh config/server.properties
 
+## Run Nats
 export GO111MODULE=on
 export GOMODCACHE=~/golang/pkg/mod
 
