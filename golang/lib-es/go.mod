@@ -1,4 +1,4 @@
-module melody-io/global-es
+module melody-io/lib-es
 
 go 1.19
 

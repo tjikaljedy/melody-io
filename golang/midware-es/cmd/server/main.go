@@ -6,10 +6,10 @@ import (
 
 	"flag"
 
-	"melody-io/global-es/pkg/config"
-	"melody-io/global-es/pkg/log"
-	route "melody-io/global-es/pkg/rsocket-route"
-	"melody-io/global-es/pkg/rsocket-route/decode"
+	"melody-io/lib-es/pkg/config"
+	"melody-io/lib-es/pkg/log"
+	route "melody-io/lib-es/pkg/rsocket-route"
+	"melody-io/lib-es/pkg/rsocket-route/decode"
 	"melody-io/midware-es/cmd"
 	"melody-io/midware-es/internal/auth"
 	"net/http"

@@ -1,8 +1,8 @@
 package config
 
 import (
-	"melody-io/global-es/pkg/env"
-	"melody-io/global-es/pkg/log"
+	"melody-io/lib-es/pkg/env"
+	"melody-io/lib-es/pkg/log"
 	"os"
 
 	validation "github.com/go-ozzo/ozzo-validation"
