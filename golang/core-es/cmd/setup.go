@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"melody-io/core-es/internal/auth"
+	"melody-io/core-es/pkg/config"
 	"os"
 	"os/signal"
 	"syscall"
@@ -19,6 +20,15 @@ import (
 )
 
 type Setup struct{}
+
+const MongoUrl = "MONGO_URL"
+const NATSUrl = "NATS_URL"
+
+func (s *Setup) InitalContext(cfg *config.Config) (context.Context, context.CancelFunc) {
+	os.Setenv(MongoUrl, cfg.MongoUrl)
+	os.Setenv(NATSUrl, cfg.NATSUrl)
+	return signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGTERM)
+}
 
 func (s *Setup) Context() (context.Context, context.CancelFunc) {
 	return signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGTERM)

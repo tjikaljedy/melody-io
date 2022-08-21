@@ -1,0 +1,6 @@
+rsocket_host: "127.0.0.1"
+rsocket_port: 7878
+gw_serve_uri: "127.0.0.1:4444"
+NATS_URL: "nats://localhost:4222"
+MONGO_URL: "mongodb://localhost:27017/eventstore"
+jwt_signing_key: "LxsKJywDL5O5PvgODZhBH12KE6k2yL8E"

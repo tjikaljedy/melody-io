@@ -9,13 +9,11 @@ import (
 	"syscall"
 
 	"github.com/modernice/goes/aggregate/repository"
-	"github.com/modernice/goes/backend/mongo"
 	"github.com/modernice/goes/backend/nats"
 	"github.com/modernice/goes/codec"
 	"github.com/modernice/goes/command"
 	"github.com/modernice/goes/command/cmdbus"
 	"github.com/modernice/goes/event"
-	"github.com/modernice/goes/event/eventstore"
 )
 
 type Setup struct{}
@@ -24,16 +22,15 @@ func (s *Setup) Context() (context.Context, context.CancelFunc) {
 	return signal.NotifyContext(context.Background(), os.Interrupt, os.Kill, syscall.SIGTERM)
 }
 
-func (s *Setup) Events(ctx context.Context, serviceName string) (_ event.Bus, _ event.Store, _ *codec.Registry, disconnect func()) {
+func (s *Setup) Events(ctx context.Context, serviceName string) (_ event.Bus, _ *codec.Registry, disconnect func()) {
 	log.Printf("Setting up events ...")
 
 	r := event.NewRegistry()
 	auth.RegisterEvents(r)
 
 	bus, disconnect := s.EventBus(ctx, r, serviceName)
-	store := eventstore.WithBus(mongo.NewEventStore(r), bus)
 
-	return bus, store, r, disconnect
+	return bus, r, disconnect
 }
 
 func (s *Setup) EventBus(ctx context.Context, enc codec.Encoding, serviceName string) (_ event.Bus, disconnect func()) {
